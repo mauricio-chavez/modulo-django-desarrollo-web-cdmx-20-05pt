@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <title>Hello</title>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title has-text-primary">Lista de películas</h1>
+      <div class="content">
+        <ul>
+          {% for movie in movies %}
+          <li>{{ movie }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <h2 class="subtitle">Crea una película</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" name="name" placeholder="Ingresa el nombre">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input class="input" type="text" name="director" placeholder="Ingresa el director">
+          </div>
+        </div>
+        <button class="button is-link">Crear</button>
+      </form>
+    </div>
+  </section>
+  <script src="{% static 'app.js' %}"></script>
+</body>
+</html>
