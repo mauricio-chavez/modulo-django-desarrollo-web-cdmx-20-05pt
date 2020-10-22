@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <title>Películas</title>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Películas</h1>
+        <div class="columns is-multiline">
+          {% for movie in movies %}
+          <div class="column is-one-third">
+            <div class="card has-background-dark">
+              <div class="card-content">
+                <p class="title is-4 has-text-white">{{ movie.name }}</p>
+                <p class="subtitle is-6 has-text-white">{{ movie.director.first_name }} {{ movie.director.last_name }}</p>
+                <a role="button" href="{% url 'movies:detail' movie.pk %}" class="button is-link">Ir a detalle</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
