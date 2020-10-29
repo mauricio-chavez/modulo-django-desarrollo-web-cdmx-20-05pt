@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <title>Crear álbum</title>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Crear álbum</h1>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+          <label for="name-id">Nombre:</label>
+          <input type="text" name="name" id="name-id" />
+          <label for="cover-id">Portada:</label>
+          <input type="file" name="cover" id="cover-id" />
+          <button>Crear</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

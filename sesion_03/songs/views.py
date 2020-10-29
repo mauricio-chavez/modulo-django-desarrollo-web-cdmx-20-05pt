@@ -15,7 +15,7 @@ def create_album(request):
     """Create a album"""
     if request.method == 'POST':
         name = request.POST.get('name')
-        cover = request.POST.get('cover')
+        cover = request.FILES.get('cover')
         Album.objects.create(name=name, cover=cover)
         return redirect('songs:list')
     else:
