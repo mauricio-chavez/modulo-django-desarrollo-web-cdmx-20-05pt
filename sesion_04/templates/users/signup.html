@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+{% endblock styles %}
+
+{% block title %}
+<title>Crear cuenta</title>
+{% endblock title %}
+
+{% block content %}
+<form class="form-signin text-center" method="POST">
+  {% for error in form.non_field_errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ error }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+  {% for error in form.email.errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ error }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+  {% for error in form.username.errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ error }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+
+  {% csrf_token %}
+  <h1 class="h3 mb-3 font-weight-normal">Crear cuenta</h1>
+
+  <label for="id_username" class="sr-only">Nombre de usuario:</label>
+  <input
+    type="text"
+    class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+    name="username"
+    required
+    id="id_username"
+    placeholder="Nombre de usuario"
+    {% if form.errors %}
+    value="{{ form.username.value }}"
+    {% endif %}
+  />
+    
+
+  <label for="id_email" class="sr-only">Correo electrónico:</label>
+  <input
+    type="email"
+    class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+    name="email"
+    required
+    id="id_email"
+    placeholder="Correo electrónico"
+    {% if form.errors %}
+    value="{{ form.email.value }}"
+    {% endif %}
+  />
+  
+
+  <label for="id_first_name" class="sr-only">Nombre(s):</label>
+  <input
+    type="text"
+    class="form-control"
+    name="first_name"
+    required
+    id="id_first_name"
+    placeholder="Nombre(s)"
+    {% if form.errors %}
+    value="{{ form.first_name.value }}"
+    {% endif %}
+  />
+
+  <label for="id_last_name" class="sr-only">Apellido(s):</label>
+  <input
+    type="text"
+    class="form-control"
+    name="last_name"
+    required
+    id="id_last_name"
+    placeholder="Apellido(s)"
+    {% if form.errors %}
+    value="{{ form.last_name.value }}"
+    {% endif %}
+  />
+
+  <label for="id_password" class="sr-only">Contraseña:</label>
+  <input
+    type="password"
+    class="form-control"
+    name="password"
+    required
+    id="id_password"
+    placeholder="Contraseña"
+  />
+
+  <label for="id_password_confirmation" class="sr-only">
+    Confirmación de contraseña:
+  </label>
+  <input
+    type="password"
+    class="form-control"
+    name="password_confirmation"
+    required
+    id="id_password_confirmation"
+    placeholder="Confirmación de contraseña"
+  />
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Crear</button>
+</form>
+{% endblock content %}
