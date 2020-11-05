@@ -1,0 +1,1 @@
+"""Products app admin site"""

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi frontend</title>
+  </head>
+  <body>
+    <section id="login">
+      <h1>Login</h1>
+      <form>
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" placeholder="password" />
+        <button>Enviar</button>
+      </form>
+    </section>
+    <section id="products" style="display: none">
+      <h1>Productos</h1>
+      <ul></ul>
+    </section>
+  </body>
+  <script>
+    const form = document.querySelector('form');
+    const list = document.querySelector('ul');
+    const login = document.querySelector('#login');
+    const products = document.querySelector('#products');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const username = document.querySelector('#username').value;
+      const password = document.querySelector('#password').value;
+      fetch('http://localhost:8000/api/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          const token = data.access;
+          fetch('http://localhost:8000/api/product/', {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          })
+            .then(response => {
+              if (response.status === 200) {
+                return response.json()
+              } else {
+                alert('Credenciales incorrectas')
+              }
+            })
+            .then(data => {
+              products.style.display = 'block'
+              login.style.display = 'none'
+              const items = data.map(
+                product => `<li>${product.name} -- $${product.price}</li>`
+              );
+              list.innerHTML = items;
+            });
+        });
+    });
+  </script>
+</html>
