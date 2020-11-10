@@ -1,0 +1,21 @@
+type Director {
+  first_name: String
+  last_name: String
+  birthday: String
+}
+
+type Movie {
+  name: String
+  releaseYear: Int
+  director: Director
+}
+
+type Query {
+  ping: String
+  # getMovies: [Movie]
+  # getMovie(id: ID!): Movie
+}
+
+type Mutation {
+  # createMovie(name: String!, birthday: String!): Movie
+}
